@@ -1,0 +1,26 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@font-face {
+    font-family: "Primary";
+    src:
+        local("Inter-VariableFont_opsz,wght"),
+        url("./assets/fonts/Inter-VariableFont_opsz,wght.ttf")
+            format("truetype");
+}
+
+@font-face {
+    font-family: "Italic";
+    src:
+        local("Inter-Italic-VariableFont_opsz,wght"),
+        url("./assets/fonts/Inter-Italic-VariableFont_opsz,wght.ttf")
+            format("truetype");
+}
+
+@font-face {
+    font-family: "Handwriting";
+    src:
+        local("CuteHandWriting"),
+        url("./assets/fonts/CuteHandWriting.ttf") format("truetype");
+}
