@@ -4,14 +4,14 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 
 //pages
-import App from "./App.tsx";
+import LandingScreen from "./pages/landing.tsx";
 
 //components
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbar.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Navbar />
-    <App />
+    <LandingScreen />
   </StrictMode>,
 );
