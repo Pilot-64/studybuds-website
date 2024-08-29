@@ -5,12 +5,18 @@ function LandingScreen() {
   return (
     <>
       <div className="h-screen snap-y snap-mandatory overflow-y-scroll scroll-smooth">
-        <div className="snap-center grid md:grid-cols-2 gap-2 place-items-center mt-[10vh] h-[80vh] bg-primary">
-          <ol className="list-decimal list-inside space-y-5">
-            <li className="text-6xl font-semibold">Connect,</li>
-            <li className="text-6xl font-semibold">Study,</li>
-            <li className="text-6xl italic">Succeed!</li>
-          </ol>
+        <div
+          id="home"
+          className="snap-center grid md:grid-cols-2 gap-2 place-items-center mt-[10vh] h-[80vh] bg-primary"
+        >
+          <div className="flex flex-col space-y-5">
+            <ol className="list-decimal list-inside space-y-5">
+              <li className="text-6xl font-semibold">Connect,</li>
+              <li className="text-6xl font-semibold">Study,</li>
+              <li className="text-6xl italic">Succeed!</li>
+            </ol>
+            <h2 className="text-xl">100% Free</h2>
+          </div>
           <img
             className="p-20"
             src={scribbleicon1}
@@ -26,7 +32,7 @@ function LandingScreen() {
           className="snap-center flex flex-col h-[90vh] justify-center items-center bg-white"
         >
           <ol className="list-decimal">
-            <h1>Simply sign up by:</h1>
+            <h1>Studies show that studying in groups </h1>
           </ol>
         </div>
       </div>
