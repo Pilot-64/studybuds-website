@@ -1,23 +1,23 @@
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 import logo_horizontal from "../assets/logo-text-horizontal.svg";
 
 function Navbar() {
   return (
     <>
-      <div className="z-10 fixed top-0 w-full h-[10vh] grid grid-cols-2 items-center bg-primary backdrop-blur-md">
-        <img src={logo_horizontal} alt="logo" className="h-14 ml-4" />
-        <ul className="h-14 flex flex-row justify-self-end mr-4 items-center space-x-8">
+      <div className="z-10 px-4 fixed top-0 w-full h-[10vh] flex flex-row justify-between items-center bg-primary backdrop-blur-md">
+        <a className="w-[200px] sm:w-[300px]" href="/">
+          <img src={logo_horizontal} alt="logo" />
+        </a>
+        <ul className="h-14 hidden sm:flex flex-row justify-self-end mr-4 items-center space-x-8">
           <li>
-            <a className="hidden sm:flex text-lg hover:underline" href="/#home">
+            <a className="flex text-lg hover:underline" href="/#home">
               Home
             </a>
           </li>
           <li>
-            <a
-              className="hidden sm:flex text-lg hover:underline"
-              href="/#about"
-            >
+            <a className="flex text-lg hover:underline" href="/#about">
               About
             </a>
           </li>
@@ -31,6 +31,12 @@ function Navbar() {
             </a>
           </li>
         </ul>
+        <a
+          className="sm:hidden border p-1 rounded-xl border-gray-300"
+          href="dashboard"
+        >
+          <RxHamburgerMenu size={"35px"} />
+        </a>
       </div>
     </>
   );
