@@ -13,7 +13,9 @@ function App() {
           />
           <div className="flex flex-col items-center justify-center space-y-5">
             <img src={logo} alt="StudyBuds logo" loading="lazy" />
-            <h1 className="text-black text-4xl font-primary">Coming Soon!</h1>
+            <h1 className="text-black text-4xl font-primary">
+              Under Maintenance
+            </h1>
           </div>
         </div>
       </div>
