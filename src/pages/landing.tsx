@@ -15,7 +15,7 @@ function LandingScreen() {
               <li className="text-6xl font-semibold">Study,</li>
               <li className="text-6xl italic">Succeed!</li>
             </ol>
-            <h2 className="text-xl">100% Free</h2>
+            <h2 className="text-xl">Join and create study communities</h2>
           </div>
           <img
             className="p-20"

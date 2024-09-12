@@ -23,11 +23,10 @@ function Navbar() {
           </li>
           <li>
             <a
-              href="/dashboard"
+              href="/login"
               className="flex flex-row items-center h-12 bg-white rounded-xl px-4"
             >
-              Get Started
-              <FaRegArrowAltCircleRight className="ml-2" />
+              Login
             </a>
           </li>
         </ul>
