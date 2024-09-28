@@ -1,10 +1,16 @@
 import { useState } from "react";
 
-import { IoThumbsDown, IoThumbsUp } from "react-icons/io5";
-import { FaHeart } from "react-icons/fa";
-import { RxDividerVertical } from "react-icons/rx";
+import { FaRegStar, FaStar } from "react-icons/fa";
+import { FaBookmark } from "react-icons/fa";
 
-function ServerCard({ server }) {
+interface Server {
+  name: string;
+  membercount: number;
+  description: string;
+  invitelink: string;
+}
+
+function ServerCard({ server }: { server: Server }) {
   const [favorite, setFavorite] = useState(false);
 
   return (
@@ -25,12 +31,13 @@ function ServerCard({ server }) {
             </div>
           </div>
           <div className="flex flex-row justify-between px-2 row-start-3">
-            <div className="flex flex-row items-center space-x-1 border rounded-xl p-1">
-              <IoThumbsUp />
-              <p>{server.likes}</p>
-              <RxDividerVertical />
-              <IoThumbsDown />
-              <p>{server.dislikes}</p>
+            <div className="flex flex-row items-center space-x-1">
+              <FaStar color="gold" className="" />
+              <FaStar color="gold" className="" />
+              <FaStar color="gold" className="" />
+              <FaStar color="gold" className="" />
+              <FaRegStar color="gold" className="" />
+              <p>4.95/5</p>
             </div>
             <div className="flex flex-row items-center space-x-1">
               <div className="bg-green-400 w-2 h-2 rounded-full" />
@@ -52,9 +59,9 @@ function ServerCard({ server }) {
             onClick={() => setFavorite(!favorite)}
             className="flex rounded-xl border justify-center items-center"
           >
-            <FaHeart
+            <FaBookmark
               className="transition-all"
-              color={favorite ? "red" : "gray"}
+              color={favorite ? "black" : "gray"}
               size={"20px"}
             />
           </button>
