@@ -18,30 +18,24 @@ interface AuthContextType {
   loading: boolean;
 }
 
+//get local storage data
+const CACHE_EXPIRATION_TIME = 10 * 60 * 1000;
+function getCachedResponse() {
+  const cachedData = localStorage.getItem("apiResponse");
+  const parsedData = cachedData ? JSON.parse(cachedData) : null;
+
+  const now = new Date().getTime();
+
+  if (cachedData && now - parsedData.timestamp < CACHE_EXPIRATION_TIME) {
+    return parsedData.response;
+  } else {
+    localStorage.removeItem("apiResponse");
+  }
+  return null;
+}
+
 // Create an authentication context with a default value
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-// Function to validate the token
-const validateToken = async () => {
-  const token = cookies.get("token");
-  if (!token) {
-    console.log("No token found in cookies.");
-    return false;
-  }
-
-  try {
-    const response = await axios.get(`http://localhost:4000/auth/${token}`);
-    console.log("Token validation response:", response.data);
-    return true; // Token is valid
-  } catch (error) {
-    const axiosError = error as AxiosError;
-    console.error(
-      "Error validating token:",
-      axiosError.response ? axiosError.response.data : axiosError.message,
-    );
-    return false; // Token is invalid
-  }
-};
 
 // Authentication provider component
 const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -72,6 +66,44 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   );
 };
 
+// Function to validate the token
+const validateToken = async () => {
+  const cachedResponse = getCachedResponse();
+  if (cachedResponse) {
+    return true;
+  }
+
+  const token = cookies.get("token");
+  if (!token) {
+    console.log("No token found in cookies.");
+    return false;
+  }
+
+  try {
+    const response = await axios.get(
+      `http://${import.meta.env.VITE_KOA_SERVER_IP}:${import.meta.env.VITE_KOA_SERVER_PORT}/auth/${token}`,
+    );
+    console.log("Token validation response:", response.data);
+
+    localStorage.setItem(
+      "apiResponse",
+      JSON.stringify({
+        response: response.data,
+        timestamp: new Date().getTime(),
+      }),
+    );
+
+    return true; // Token is valid
+  } catch (error) {
+    const axiosError = error as AxiosError;
+    console.error(
+      "Error validating token:",
+      axiosError.response ? axiosError.response.data : axiosError.message,
+    );
+    return false; // Token is invalid
+  }
+};
+
 // Custom hook to use the AuthContext
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
@@ -81,5 +113,14 @@ export const useAuth = (): AuthContextType => {
   return context;
 };
 
-// Export the AuthProvider component
+// Function to set the cookie
+interface cookieProps {
+  token: string;
+}
+export const setCookie = ({ token }: cookieProps): void => {
+  cookies.set("token", token);
+  console.log("Cookie set successfully!");
+  return;
+};
+
 export default AuthProvider;

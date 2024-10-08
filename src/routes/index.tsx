@@ -8,27 +8,31 @@ import { useAuth } from "../provider/authProvider";
 import Dashboard from "../pages/dashboard";
 import LandingScreen from "../pages/landing";
 
-export const ProtectedRoute = ({ authBool = false }) => {
+import AuthCallback from "../provider/callback";
+import Loading from "../pages/loading";
+
+export const ProtectedRoute = ({ authBool = false, loading = false }) => {
   console.log(authBool);
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return authBool ? <Outlet /> : <Navigate to="/" />;
 };
 
 const Routes: React.FC = () => {
-  const { isAuthenticated /*, loading*/ } = useAuth();
+  const { isAuthenticated, loading } = useAuth();
   //console.log(isAuthenticated, loading);
 
   // Define routes accessible only to authenticated users
   const routesForAuthenticatedOnly = [
     {
       path: "/",
-      element: <ProtectedRoute authBool={isAuthenticated} />, // Wrap the component in ProtectedRoute
+      element: <ProtectedRoute authBool={isAuthenticated} loading={loading} />, // Wrap the component in ProtectedRoute
       children: [
         {
           path: "/",
-          element: <Dashboard />,
-        },
-        {
-          path: "dashboard",
           element: <Dashboard />,
         },
         {
@@ -49,6 +53,10 @@ const Routes: React.FC = () => {
       path: "login",
       element: <div>Login</div>,
     },
+    {
+      path: "auth/callback",
+      element: <AuthCallback />,
+    },
   ];
 
   /* logging
@@ -66,7 +74,7 @@ const Routes: React.FC = () => {
       : routesForNotAuthenticatedOnly),
     {
       path: "*",
-      element: <Navigate to="/loading" />, // Fallback for unmatched routes
+      element: <Loading />, // Fallback for unmatched routes
     },
   ]);
 
