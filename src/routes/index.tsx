@@ -10,6 +10,7 @@ import LandingScreen from "../pages/landing";
 
 import AuthCallback from "../provider/callback";
 import Loading from "../pages/loading";
+import AdminPage from "../pages/admin";
 
 export const ProtectedRoute = ({ authBool = false, loading = false }) => {
   console.log(authBool);
@@ -38,6 +39,10 @@ const Routes: React.FC = () => {
         {
           path: "logout",
           element: <div>Logout</div>,
+        },
+        {
+          path: "admin",
+          element: <AdminPage />,
         },
       ],
     },

@@ -3,10 +3,10 @@ import { BsDiscord, BsMouse } from "react-icons/bs";
 function LandingScreen() {
   return (
     <>
-      <div className="h-[93vh] snap-y snap-mandatory overflow-y-scroll scroll-smooth">
+      <div className="h-[93vh] space-y-8 snap-y snap-mandatory overflow-y-scroll scroll-smooth">
         <div
           id="home"
-          className="snap-center flex flex-col justify-center items-center h-[70vh] sm:h-[83vh] bg-primary"
+          className="snap-center flex flex-col justify-center items-center h-[93vh] bg-primary"
         >
           <div className="flex flex-col items-center justify-center space-y-5">
             <h2 className="text-6xl font-semibold text-center px-3">
@@ -28,14 +28,14 @@ function LandingScreen() {
               </div>
             </div>
           </div>
-        </div>
-        <div className="flex flex-col col-span-2 items-center justify-center w-full h-[15vh] bg-primary">
-          <BsMouse className="animate-bounce w-10 h-10" />
-          <h1>About</h1>
+          <div className="flex flex-col col-span-2 items-center justify-center w-full bg-primary">
+            <BsMouse className="animate-bounce w-10 h-10" />
+            <h1>About</h1>
+          </div>
         </div>
         <div
           id="about"
-          className="snap-center flex flex-col h-[93vh] pt-10 border-t-4 justify-start items-center bg-white"
+          className="snap-center flex flex-col h-[93vh] border-t-4 justify-start items-center bg-white"
         >
           <h2 className="text-6xl">
             Made by highschoolers, for highschoolers.
