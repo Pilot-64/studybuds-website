@@ -11,6 +11,7 @@ import LandingScreen from "../pages/landing";
 import AuthCallback from "../provider/callback";
 import Loading from "../pages/loading";
 import AdminPage from "../pages/admin";
+import Error404Page from "../pages/404";
 
 export const ProtectedRoute = ({ authBool = false, loading = false }) => {
   console.log(authBool);
@@ -79,7 +80,7 @@ const Routes: React.FC = () => {
       : routesForNotAuthenticatedOnly),
     {
       path: "*",
-      element: <Loading />, // Fallback for unmatched routes
+      element: <Error404Page />, // Fallback for unmatched routes
     },
   ]);
 

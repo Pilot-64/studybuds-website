@@ -33,7 +33,7 @@ function Navbar() {
 
   return (
     <>
-      <div className="z-10 px-[1.5vw] sticky top-0 w-full h-[100px] flex flex-row justify-between items-center bg-primary backdrop-blur-md">
+      <div className="z-10 px-[1.5vw] sticky top-0 w-full h-[80px] mb-[-80px] flex flex-row justify-between items-center bg-primary backdrop-blur-md">
         <a className="w-[200px] sm:w-[300px]" href="/">
           <img src={logo_horizontal} alt="logo" />
         </a>
@@ -58,9 +58,7 @@ function Navbar() {
             <li>
               <button
                 onClick={async () => {
-                  const response = await axios.get(
-                    `http://${import.meta.env.VITE_KOA_SERVER_IP}:${import.meta.env.VITE_KOA_SERVER_PORT}/auth/discord/login`,
-                  );
+                  const response = await axios.get(`/api/auth/discord/login`);
                   console.log(response);
                   window.location.href = response.data;
                 }}

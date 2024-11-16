@@ -80,9 +80,7 @@ const validateToken = async () => {
   }
 
   try {
-    const response = await axios.get(
-      `http://${import.meta.env.VITE_KOA_SERVER_IP}:${import.meta.env.VITE_KOA_SERVER_PORT}/auth/${token}`,
-    );
+    const response = await axios.get(`/api/auth/${token}`);
     console.log("Token validation response:", response.data);
 
     localStorage.setItem(

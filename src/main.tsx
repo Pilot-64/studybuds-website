@@ -11,8 +11,10 @@ const App = () => {
   return (
     <StrictMode>
       <AuthProvider>
-        <Navbar />
-        <Routes />
+        <div style={{ height: "calc(100vh - 100px)" }}>
+          <Navbar />
+          <Routes />
+        </div>
       </AuthProvider>
     </StrictMode>
   );

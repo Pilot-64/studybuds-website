@@ -1,8 +1,21 @@
-import React, { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
+
+type CreateFormData = {
+  name: string;
+  description: string;
+  inviteLink: string;
+  ownerId: string;
+  rating: number;
+  membercount: number;
+};
+
+type DeleteFormData = {
+  id: string; // Use string since form inputs return strings even for numbers
+};
 
 function AdminPage() {
   // State to hold form data
-  const [createFormData, setCreateFormData] = useState({
+  const [createFormData, setCreateFormData] = useState<CreateFormData>({
     name: "",
     description: "",
     inviteLink: "",
@@ -10,12 +23,13 @@ function AdminPage() {
     rating: 0,
     membercount: 0,
   });
-  const [deleteFormData, setDeleteFormData] = useState({
-    id: 0,
+
+  const [deleteFormData, setDeleteFormData] = useState<DeleteFormData>({
+    id: "",
   });
 
   // Handle form input changes for create form
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCreateFormData({
       ...createFormData,
       [e.target.name]: e.target.value,
@@ -23,7 +37,7 @@ function AdminPage() {
   };
 
   // Handle form input changes for delete form
-  const handleDeleteChange = (e) => {
+  const handleDeleteChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDeleteFormData({
       ...deleteFormData,
       [e.target.name]: e.target.value,
@@ -31,11 +45,11 @@ function AdminPage() {
   };
 
   // Handle form submission for creating a server
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault(); // Prevent form from refreshing the page
 
     try {
-      const response = await fetch("http://localhost:4000/servers/addserver", {
+      const response = await fetch("/api/servers/addserver", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -55,12 +69,12 @@ function AdminPage() {
   };
 
   // Handle form submission for deleting a server
-  const deleteHandleSubmit = async (e) => {
+  const deleteHandleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     try {
       const response = await fetch(
-        `http://localhost:4000/servers/deleteserver/${deleteFormData.id}`,
+        `/api/servers/deleteserver/${deleteFormData.id}`,
         {
           method: "DELETE",
           headers: {

@@ -1,13 +1,46 @@
 import { BsDiscord, BsMouse } from "react-icons/bs";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+import arrowImage from "../assets/arrows.svg";
+
+async function getData(): Promise<any | null> {
+  try {
+    const response = await axios.get(`/api/getdata`);
+    return response;
+  } catch (error) {
+    console.error("Error fetching info:", (error as Error).message);
+    return null;
+  }
+}
 
 function LandingScreen() {
+  const [userCount, setUserCount] = useState(0);
+  const [serverCount, setServerCount] = useState(0);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getData();
+
+      //console.log(data.data.userCount, data.data.serverCount);
+
+      setUserCount(data.data.userCount);
+      setServerCount(data.data.serverCount);
+    }
+    fetchData();
+  }, []);
+
   return (
     <>
-      <div className="h-[93vh] space-y-8 snap-y snap-mandatory overflow-y-scroll scroll-smooth">
+      <div className="h-screen snap-y snap-mandatory overflow-y-scroll scroll-smooth">
         <div
           id="home"
-          className="snap-center flex flex-col justify-center items-center h-[93vh] bg-primary"
+          className="snap-center flex flex-col justify-center items-center h-full bg-primary"
         >
+          <img
+            className="absolute w-[100px] h-[100px] top-20 right-14 -rotate-[70deg]"
+            src={arrowImage}
+          />
           <div className="flex flex-col items-center justify-center space-y-5">
             <h2 className="text-6xl font-semibold text-center px-3">
               Discover educational{" "}
@@ -22,9 +55,13 @@ function LandingScreen() {
             <div className="flex flex-row space-x-8">
               <div className="flex flex-row space-x-1 items-center">
                 <div className="bg-green-400 w-2 h-2 rounded-full animate-pulse" />
-                <p className="font-medium text-2xl">121 Students</p>
-                <p className="text-2xl">in</p>
-                <p className="font-medium text-2xl">12 Servers</p>
+                <p className="font-medium text-2xl">
+                  {userCount + " Active Students"}
+                </p>
+                <p className="text-2xl">and</p>
+                <p className="font-medium text-2xl">
+                  {serverCount + " Servers"}
+                </p>
               </div>
             </div>
           </div>
@@ -35,11 +72,9 @@ function LandingScreen() {
         </div>
         <div
           id="about"
-          className="snap-center flex flex-col h-[93vh] border-t-4 justify-start items-center bg-white"
+          className="snap-center flex flex-col h-full border-t-4 justify-center items-center bg-white"
         >
-          <h2 className="text-6xl">
-            Made by highschoolers, for highschoolers.
-          </h2>
+          <h2 className="text-6xl">Made by students, for students.</h2>
           <h2 className="text-4xl">
             We get it. Studying is hard. But it doesn't have to be.
           </h2>
